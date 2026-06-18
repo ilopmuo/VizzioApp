@@ -6,6 +6,7 @@ import {
   ClipboardList,
   Package,
   Users,
+  UserPlus,
   LogOut,
   Menu,
   Zap,
@@ -14,14 +15,15 @@ import { useAuth } from '../contexts/AuthContext'
 
 const employeeLinks = [
   { to: '/dashboard', label: 'Dashboard', icon: LayoutDashboard },
-  { to: '/mis-horas', label: 'Mis Horas', icon: ClipboardList },
-  { to: '/imputar-horas', label: 'Imputar Horas', icon: Clock },
+  { to: '/mis-horas', label: 'Mis horas', icon: ClipboardList },
+  { to: '/imputar-horas', label: 'Imputar horas', icon: Clock },
 ]
 
 const bossLinks = [
   { to: '/dashboard', label: 'Dashboard', icon: LayoutDashboard },
-  { to: '/horas-empleados', label: 'Horas Empleados', icon: Users },
+  { to: '/horas-empleados', label: 'Horas del equipo', icon: Users },
   { to: '/recursos', label: 'Recursos', icon: Package },
+  { to: '/empleados', label: 'Empleados', icon: UserPlus },
 ]
 
 export default function Layout({ children }: { children: React.ReactNode }) {
@@ -37,43 +39,40 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   }
 
   return (
-    <div className="min-h-screen flex bg-[#08060f]">
+    <div className="min-h-screen flex bg-white">
       {/* Sidebar desktop */}
-      <aside className="hidden md:flex flex-col w-64 bg-[#0f0c1e] border-r border-violet-900/30 shrink-0">
+      <aside className="hidden md:flex flex-col w-60 bg-black shrink-0">
         <SidebarContent links={links} profile={profile} onSignOut={handleSignOut} />
       </aside>
 
       {/* Mobile overlay */}
       {mobileOpen && (
         <div
-          className="fixed inset-0 z-40 bg-black/60 md:hidden"
+          className="fixed inset-0 z-40 bg-black/40 md:hidden"
           onClick={() => setMobileOpen(false)}
         />
       )}
 
       {/* Sidebar mobile */}
       <aside
-        className={`fixed inset-y-0 left-0 z-50 w-64 bg-[#0f0c1e] border-r border-violet-900/30 flex flex-col transform transition-transform duration-200 md:hidden ${
+        className={`fixed inset-y-0 left-0 z-50 w-60 bg-black flex flex-col transform transition-transform duration-200 md:hidden ${
           mobileOpen ? 'translate-x-0' : '-translate-x-full'
         }`}
       >
         <SidebarContent links={links} profile={profile} onSignOut={handleSignOut} />
       </aside>
 
-      {/* Main content */}
+      {/* Main */}
       <div className="flex-1 flex flex-col min-w-0">
         {/* Mobile top bar */}
-        <header className="md:hidden flex items-center gap-3 px-4 h-14 bg-[#0f0c1e] border-b border-violet-900/30">
-          <button
-            onClick={() => setMobileOpen(true)}
-            className="text-violet-400 hover:text-violet-300"
-          >
-            <Menu size={22} />
+        <header className="md:hidden flex items-center gap-3 px-4 h-12 bg-white border-b border-[#d2d2d7]">
+          <button onClick={() => setMobileOpen(true)} className="text-[#1d1d1f]">
+            <Menu size={20} />
           </button>
           <LogoMark />
         </header>
 
-        <main className="flex-1 p-4 md:p-8 overflow-auto">{children}</main>
+        <main className="flex-1 p-6 md:p-10 overflow-auto bg-[#f5f5f7]">{children}</main>
       </div>
     </div>
   )
@@ -82,10 +81,10 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 function LogoMark() {
   return (
     <div className="flex items-center gap-2">
-      <div className="w-7 h-7 rounded-lg bg-violet-600 flex items-center justify-center">
-        <Zap size={14} className="text-white" />
+      <div className="w-6 h-6 rounded-md bg-[#0066cc] flex items-center justify-center">
+        <Zap size={13} className="text-white" />
       </div>
-      <span className="font-bold text-white tracking-wide text-lg">VIZZIO</span>
+      <span className="font-semibold text-[#1d1d1f] tracking-tight text-base">Vizzio</span>
     </div>
   )
 }
@@ -101,42 +100,44 @@ function SidebarContent({
 }) {
   return (
     <>
-      <div className="px-5 py-6 border-b border-violet-900/30">
-        <LogoMark />
-        <p className="text-xs text-violet-500 mt-1 uppercase tracking-widest">
-          Gestión de Recursos
-        </p>
+      <div className="px-5 pt-7 pb-6">
+        <div className="flex items-center gap-2.5">
+          <div className="w-7 h-7 rounded-lg bg-[#0066cc] flex items-center justify-center">
+            <Zap size={14} className="text-white" />
+          </div>
+          <span className="font-semibold text-white tracking-tight text-lg">Vizzio</span>
+        </div>
       </div>
 
-      <nav className="flex-1 px-3 py-4 space-y-1">
+      <nav className="flex-1 px-3 space-y-0.5">
         {links.map(({ to, label, icon: Icon }) => (
           <NavLink
             key={to}
             to={to}
             className={({ isActive }) =>
-              `flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors ${
+              `flex items-center gap-3 px-3 py-2 rounded-lg text-sm transition-colors ${
                 isActive
-                  ? 'bg-violet-600/20 text-violet-300 border border-violet-600/30'
-                  : 'text-violet-400/70 hover:text-violet-300 hover:bg-violet-900/20'
+                  ? 'bg-white/10 text-white'
+                  : 'text-[#86868b] hover:text-white hover:bg-white/5'
               }`
             }
           >
-            <Icon size={17} />
+            <Icon size={16} />
             {label}
           </NavLink>
         ))}
       </nav>
 
-      <div className="px-3 py-4 border-t border-violet-900/30 space-y-3">
-        <div className="px-3 py-2 rounded-lg bg-violet-900/20">
+      <div className="px-3 pb-5 pt-4 border-t border-white/10 space-y-2 mt-auto">
+        <div className="px-3 py-2">
           <p className="text-sm font-medium text-white truncate">{profile?.full_name}</p>
-          <p className="text-xs text-violet-400 capitalize">{profile?.role}</p>
+          <p className="text-xs text-[#86868b] capitalize mt-0.5">{profile?.role}</p>
         </div>
         <button
           onClick={onSignOut}
-          className="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-red-400/80 hover:text-red-400 hover:bg-red-900/20 transition-colors"
+          className="w-full flex items-center gap-3 px-3 py-2 rounded-lg text-sm text-[#86868b] hover:text-white hover:bg-white/5 transition-colors"
         >
-          <LogOut size={17} />
+          <LogOut size={16} />
           Cerrar sesión
         </button>
       </div>
