@@ -23,7 +23,7 @@ export default function ProtectedRoute({ children, requiredRole }: Props) {
 
   if (!user) return <Navigate to="/login" replace />
 
-  if (requiredRole && profile?.role !== requiredRole) {
+  if (requiredRole && profile?.role !== requiredRole && profile?.role !== 'jefe') {
     return <Navigate to="/dashboard" replace />
   }
 

@@ -7,6 +7,7 @@ import {
   Package,
   Users,
   UserPlus,
+  FileText,
   LogOut,
   Menu,
   Zap,
@@ -21,9 +22,12 @@ const employeeLinks = [
 
 const bossLinks = [
   { to: '/dashboard', label: 'Dashboard', icon: LayoutDashboard },
+  { to: '/imputar-horas', label: 'Imputar horas', icon: Clock },
+  { to: '/mis-horas', label: 'Mis horas', icon: ClipboardList },
   { to: '/horas-empleados', label: 'Horas del equipo', icon: Users },
   { to: '/recursos', label: 'Recursos', icon: Package },
   { to: '/empleados', label: 'Empleados', icon: UserPlus },
+  { to: '/hoja-firma', label: 'Hoja de firma', icon: FileText },
 ]
 
 export default function Layout({ children }: { children: React.ReactNode }) {

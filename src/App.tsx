@@ -9,6 +9,7 @@ import MyHours from './pages/employee/MyHours'
 import EmployeeHours from './pages/boss/EmployeeHours'
 import Resources from './pages/boss/Resources'
 import CreateEmployee from './pages/boss/CreateEmployee'
+import HojaFirma from './pages/boss/HojaFirma'
 
 export default function App() {
   return (
@@ -67,6 +68,15 @@ export default function App() {
             element={
               <ProtectedRoute requiredRole="jefe">
                 <CreateEmployee />
+              </ProtectedRoute>
+            }
+          />
+
+          <Route
+            path="/hoja-firma"
+            element={
+              <ProtectedRoute requiredRole="jefe">
+                <HojaFirma />
               </ProtectedRoute>
             }
           />
