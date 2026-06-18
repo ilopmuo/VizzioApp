@@ -1,0 +1,32 @@
+@import "tailwindcss";
+
+@theme {
+  --color-vizzio-900: #08060f;
+  --color-vizzio-800: #0f0c1e;
+  --color-vizzio-700: #16122a;
+  --color-vizzio-600: #1e1936;
+  --color-vizzio-500: #2a2248;
+  --color-vizzio-400: #3d3266;
+  --color-vizzio-accent: #8b5cf6;
+  --color-vizzio-accent-bright: #a78bfa;
+  --color-vizzio-accent-dim: #6d28d9;
+  --color-vizzio-gold: #f59e0b;
+  --color-vizzio-text: #e2e0f0;
+  --color-vizzio-muted: #8b85a8;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background-color: #08060f;
+  color: #e2e0f0;
+  font-family: system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+#root {
+  min-height: 100vh;
+}
